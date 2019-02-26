@@ -1,6 +1,6 @@
 
 import { WeElement, define } from 'omi'
-import '../../components/my-element'
+import '../my-element'
 
 //兼容 omi 下划线？
 import './index.css'
