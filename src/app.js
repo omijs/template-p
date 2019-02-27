@@ -14,6 +14,8 @@ define('my-app', class extends WeElement {
   config = {
     pages: [
       'pages/index/index',
+      'pages/list/index',
+      'pages/detail/index',
       'pages/logs/index'
     ],
     window: {
