@@ -123,7 +123,7 @@ function parseJSXChildren(children) {
 function parseJSXElement(element) {
     const children = element.children;
     const { attributes, name } = element.openingElement;
-    const TRIGGER_OBSERER = adapter_1.Adapter.type === "swan" /* swan */ ? 'privateTriggerObserer' : '__triggerObserer';
+    //const TRIGGER_OBSERER = adapter_1.Adapter.type === "swan" /* swan */ ? 'privateTriggerObserer' : '__triggerObserer';
     if (t.isJSXMemberExpression(name)) {
         throw utils_1.codeFrameError(name.loc, '暂不支持 JSX 成员表达式');
     }
@@ -230,13 +230,13 @@ function parseJSXElement(element) {
                 }
             }
             if (!isDefaultComponent && !specialComponentName.includes(componentName)) {
-                obj[TRIGGER_OBSERER] = '{{ _triggerObserer }}';
+                //obj[TRIGGER_OBSERER] = '{{ _triggerObserer }}';
             }
             return obj;
         }, {});
     }
     else if (!isDefaultComponent && !specialComponentName.includes(componentName)) {
-        attributesTrans[TRIGGER_OBSERER] = '{{ _triggerObserer }}';
+        //attributesTrans[TRIGGER_OBSERER] = '{{ _triggerObserer }}';
     }
     return create_html_element_1.createHTMLElement({
         name: lodash_1.kebabCase(componentName),
