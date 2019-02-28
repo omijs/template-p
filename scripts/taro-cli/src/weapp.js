@@ -766,7 +766,7 @@ function parseAst (type, ast, depComponents, sourceFilePath, filePath, npmSkip =
             node.body[node.body.length-2].expression.callee.name = 'global.Omi.defineApp'
             //node.body.push(template(`App(require('${taroMiniAppFrameworkPath}').default.createApp(${exportVariableName}))`, babylonConfig)())
             //node.body.push(template(`Taro.initPxTransform(${JSON.stringify(pxTransformConfig)})`, babylonConfig)())
-            //@fix Please do not call Page constructor in files that not listed in "pages" section of app.json or plugin.json     
+            //@fix Please do not call Page constructor in files that not listed in "pages" section of app.json or plugin.json
             node.body.forEach((item, index) => {
               if (item.type === 'ImportDeclaration' && item.source.value.indexOf('./pages/') === 0 && node.body[index].specifiers.length === 0) {
                 node.body[index] = null
@@ -777,7 +777,7 @@ function parseAst (type, ast, depComponents, sourceFilePath, filePath, npmSkip =
             if (buildAdapter === Util.BUILD_TYPES.WEAPP) {
               //@fix 注释掉用来解决小程序报错
               const arr = sourceFilePath.split( isWindows ? '\\' : '/')
-              const path = arr[arr.length - 3] + '/' + arr[arr.length - 2] + '/' + arr[arr.length-1].split('.')[0]      
+              const path = arr[arr.length - 3] + '/' + arr[arr.length - 2] + '/' + arr[arr.length-1].split('.')[0]
               const obj = JSON.parse(JSON.stringify(node.body[node.body.length-1].expression.arguments[0]))
               obj.value = path
               //给 define 增加第三个参数
@@ -785,6 +785,16 @@ function parseAst (type, ast, depComponents, sourceFilePath, filePath, npmSkip =
               node.body[node.body.length-1].expression.callee.name = 'global.Omi.definePage'
               node.body.push(template(`global.create.Page(global.getOptions('${path}'))`, babylonConfig)())
               //node.body.push(template(`Component(require('${taroMiniAppFrameworkPath}').default.createComponent(${exportVariableName}, true))`, babylonConfig)())
+
+              node.body.forEach((item, index) => {
+                if (item.type === 'ImportDeclaration') {
+                  const v = node.body[index].source.value
+                  if (v.indexOf('components/') !== -1  && node.body[index].specifiers.length === 0) {
+                    node.body[index] = null
+                  }
+                }
+              })
+
             } else {
               node.body.push(template(`Page(require('${taroMiniAppFrameworkPath}').default.createComponent(${exportVariableName}, true))`, babylonConfig)())
             }
