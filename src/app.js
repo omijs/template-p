@@ -1,3 +1,4 @@
+
 import './app.css'
 import './pages/index/index'
 import { render, WeElement, define } from 'omi'
@@ -69,4 +70,4 @@ define('my-app', class extends WeElement {
 })
 
 
-render(<my-app />, 'body')
+render(<my-app />, '#app')
