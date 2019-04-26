@@ -1,6 +1,6 @@
 
 import { WeElement, define } from 'omi'
-import './index.css'
+import './index.less'
 
 //获取应用实例
 const app = getApp()
