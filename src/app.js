@@ -1,9 +1,9 @@
 
 import './app.css'
 import './pages/index/index'
-import { render, WeElement, define } from 'omi'
-
-define('my-app', class extends WeElement {
+import { render, WeElement, define, h } from 'omi'
+import packageJson from '../package.json'
+define(packageJson.name, class extends WeElement {
 
   config = {
     pages: [
@@ -70,4 +70,4 @@ define('my-app', class extends WeElement {
 })
 
 
-render(<my-app />, '#app')
+render(h(packageJson.name), '#app')

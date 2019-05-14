@@ -1,5 +1,6 @@
+const packageJson = require('../package.json')
 const config = {
-  projectName: 'my-app',
+  projectName: packageJson.name,
   date: '2019-2-21',
   designWidth: 750,
   deviceRatio: {
